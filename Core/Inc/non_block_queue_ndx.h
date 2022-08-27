@@ -39,13 +39,13 @@ typedef struct
 
 
 void NBQ_Init(volatile NBQ_QueueHdr_t * pQueueHdr, void * pQueueBuffer, uint32_t itemSizeBytes, uint32_t maxItems);
-GP_StatusTypeDef NBQ_AcquireFront(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppNextFront);
+GP_Status_t NBQ_AcquireFront(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppNextFront);
 void NBQ_ReleaseFront(volatile NBQ_QueueHdr_t * pQueueHdr);
-GP_StatusTypeDef NBQ_AcquireBack(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppBack);
+GP_Status_t NBQ_AcquireBack(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppBack);
 void NBQ_ReleaseBack(volatile NBQ_QueueHdr_t * pQueueHdr);
 void NBQ_UnlockBack(volatile NBQ_QueueHdr_t * pQueueHdr);
-GP_StatusTypeDef NBQ_Empty(volatile NBQ_QueueHdr_t * pQueueHdr);
-GP_StatusTypeDef NBQ_IsFull(volatile NBQ_QueueHdr_t * pQueueHdr);
+GP_Status_t NBQ_Empty(volatile NBQ_QueueHdr_t * pQueueHdr);
+GP_Status_t NBQ_IsFull(volatile NBQ_QueueHdr_t * pQueueHdr);
 
 #ifdef __cplusplus
 }

@@ -26,6 +26,7 @@
 #include "acc_gyro_sensor.h"
 #include "lsm6dsl.h"
 #include "sensor_bus1.h"
+#include <SEGGER_SYSVIEW.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,6 +90,8 @@ static void MX_DMA_Init(void);
 void StartDefaultTask(void *argument);
 
 /* USER CODE BEGIN PFP */
+static void AccGyroCallback(LSM6DSL_AxesRaw_t * pRawData, uint16_t numItems);
+static void MagCallback(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems);
 
 /* USER CODE END PFP */
 
@@ -130,8 +133,8 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   MX_DMA_Init();
   /* USER CODE BEGIN 2 */
-
-  SensorBus1_Init();
+  SEGGER_SYSVIEW_Conf();
+  InitSensorBus1(AccGyroCallback, MagCallback);
 
   /* USER CODE END 2 */
 
@@ -446,7 +449,7 @@ static void MX_GPIO_Init(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 	if ( (GPIO_Pin == MagDataRdy_Pin) || (GPIO_Pin == Lms6dsl_Int1_Pin)) {
-		SensorBus1_Update();
+		UpdateSensorBus1();
 	}
 
 
@@ -481,7 +484,7 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	SensorBus1_Start();
+	StartSensorBus1();
 
 	/* Infinite loop */
 	for (;;) {
@@ -489,6 +492,18 @@ void StartDefaultTask(void *argument)
 	}
   /* USER CODE END 5 */
 }
+
+
+void AccGyroCallback(LSM6DSL_AxesRaw_t * pRawData, uint16_t numItems) {
+
+}
+
+
+static void MagCallback(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems) {
+
+}
+
+
 
 /**
   * @brief  Period elapsed callback in non blocking mode
@@ -536,8 +551,9 @@ void Error_Handler(void)
 void assert_failed(uint8_t *file, uint32_t line)
 {
   /* USER CODE BEGIN 6 */
-	/* User can add his own implementation to report the file name and line number,
-	 ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+	  SEGGER_SYSVIEW_PrintfHost("Assertion Failed:file %s \
+	                            on line %d\r\n", file, line);
+	  while(1);
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

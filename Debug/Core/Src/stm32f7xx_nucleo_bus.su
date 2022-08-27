@@ -1,0 +1,15 @@
+../Core/Src/stm32f7xx_nucleo_bus.c:93:9:BSP_I2C1_Init	16	static
+../Core/Src/stm32f7xx_nucleo_bus.c:141:9:BSP_I2C1_DeInit	16	static
+../Core/Src/stm32f7xx_nucleo_bus.c:169:9:BSP_I2C1_IsReady	24	static
+../Core/Src/stm32f7xx_nucleo_bus.c:190:9:BSP_I2C1_WriteReg	48	static
+../Core/Src/stm32f7xx_nucleo_bus.c:216:10:BSP_I2C1_ReadReg	48	static
+../Core/Src/stm32f7xx_nucleo_bus.c:244:9:BSP_I2C1_WriteReg16	48	static
+../Core/Src/stm32f7xx_nucleo_bus.c:269:10:BSP_I2C1_ReadReg16	48	static
+../Core/Src/stm32f7xx_nucleo_bus.c:294:9:BSP_I2C1_Send	32	static
+../Core/Src/stm32f7xx_nucleo_bus.c:319:9:BSP_I2C1_Recv	32	static
+../Core/Src/stm32f7xx_nucleo_bus.c:342:9:BSP_I2C1_Send_DMA	24	static
+../Core/Src/stm32f7xx_nucleo_bus.c:358:10:BSP_I2C1_Recv_DMA	24	static
+../Core/Src/stm32f7xx_nucleo_bus.c:427:9:BSP_GetTick	8	static
+../Core/Src/stm32f7xx_nucleo_bus.c:433:26:MX_I2C1_Init	24	static
+../Core/Src/stm32f7xx_nucleo_bus.c:466:13:I2C1_MspInit	192	static
+../Core/Src/stm32f7xx_nucleo_bus.c:542:13:I2C1_MspDeInit	16	static

@@ -6,17 +6,20 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include "general_purpose_defs.h"
-
-typedef enum {
-	DMA_RDY = 0, DMA_MAG = 1, DMA_ACC_GYRO = 2
-} BUS1_DMA_TypeDef;
+#include "bsp_Lsm6dsl.h"
+#include "bsp_lsm303agr.h"
 
 
 
-extern void SensorBus1_Init(void);
-extern void SensorBus1_Start(void);
-extern void SensorBus1_Update(void);
+typedef void (*AccGyroCallback_t)(GYRO_ACC_t * pRawData, uint16_t numItems);
+typedef void (*MagCallback_t)(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems);
+
+
+extern void InitSensorBus1(AccGyroCallback_t pAccGyroCB, MagCallback_t pMagCB);
+extern void StartSensorBus1(void);
+extern void UpdateSensorBus1(void);
+extern void SensorBus1_DMA_CallBack(void);
+
 
 
 #ifdef __cplusplus

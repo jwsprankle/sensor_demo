@@ -27,7 +27,7 @@ void NBQ_Init(volatile NBQ_QueueHdr_t * pQueueHdr, void * pQueueBuffer, uint32_t
 // Producer thread only reference pQueueHdr->pBack, so we'll insure we use atomic to read this variable
 // Comsumer thread only references pQueueHdr->pFront, thus atomic writes are require to write this variable.
 // 
-GP_StatusTypeDef NBQ_AcquireFront(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppNextFront) 
+GP_Status_t NBQ_AcquireFront(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppNextFront) 
 {
 	// Check for front locked
 	// pNextFront != null if front is locked
@@ -68,7 +68,7 @@ void NBQ_ReleaseFront(volatile NBQ_QueueHdr_t * pQueueHdr)
 
 // This gets back without advancing the back pointer, thus protecting the data
 // from overwrite until released.
-GP_StatusTypeDef NBQ_AcquireBack(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppBack)
+GP_Status_t NBQ_AcquireBack(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppBack)
 {
 		// Error if already locked
 	if (pQueueHdr->pNextBack != NULL)
@@ -112,7 +112,7 @@ void NBQ_UnlockBack(volatile NBQ_QueueHdr_t * pQueueHdr)
 }
 
 
-GP_StatusTypeDef NBQ_Empty(volatile NBQ_QueueHdr_t * pQueueHdr)
+GP_Status_t NBQ_Empty(volatile NBQ_QueueHdr_t * pQueueHdr)
 {
 	if (pQueueHdr->pFront == pQueueHdr->pBack)
 	{
@@ -125,7 +125,7 @@ GP_StatusTypeDef NBQ_Empty(volatile NBQ_QueueHdr_t * pQueueHdr)
 
 // Check for queue full
 // Full is true when pNextFront == pBack
-GP_StatusTypeDef NBQ_QueueFull(volatile NBQ_QueueHdr_t * pQueueHdr)
+GP_Status_t NBQ_QueueFull(volatile NBQ_QueueHdr_t * pQueueHdr)
 {
 	/* Create next Front */
 	volatile void * pNextFrontTemp = (int8_t *)(pQueueHdr->pFront) + pQueueHdr->itemSizeBytes;

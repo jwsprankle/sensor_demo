@@ -8,7 +8,7 @@ extern "C"
 
 typedef enum {
 	GP_OK = 0, GP_FAIL = 1, GP_FALSE = 0, GP_TRUE = 1
-} GP_StatusTypeDef;
+} GP_Status_t;
 
 #ifdef __cplusplus
 }

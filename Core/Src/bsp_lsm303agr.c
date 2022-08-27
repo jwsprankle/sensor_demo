@@ -80,7 +80,7 @@ int32_t bsp_lsm303agr_enable(void) {
 }
 
 int32_t bsp_lsm303agr_disable(void) {
-	// Start up mag
+	// Stop mag
 	if (LSM303AGR_MAG_Disable(&bsp_mag_lsm303agr_Obj) != LSM303AGR_OK) {
 		return LSM303AGR_ERROR;
 	}

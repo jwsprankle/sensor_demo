@@ -7,7 +7,7 @@ extern "C"
 #endif
 
 #include <stdint.h>
-#include "lsm303agr.h"
+#include <lsm303agr.h>
 
 #define MAG_ACC_AVG_SAMPLES 10
 #define MAG_ACC_TOTAL_SAMPLES (MAG_ACC_AVG_SAMPLES * 2)
