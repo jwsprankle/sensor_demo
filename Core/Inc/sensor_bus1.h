@@ -10,7 +10,7 @@ extern "C" {
 #include "bsp_lsm303agr.h"
 
 
-
+// Note: add note about time limit on pRawData
 typedef void (*AccGyroCallback_t)(GYRO_ACC_t * pRawData, uint16_t numItems);
 typedef void (*MagCallback_t)(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems);
 

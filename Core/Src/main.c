@@ -90,7 +90,7 @@ static void MX_DMA_Init(void);
 void StartDefaultTask(void *argument);
 
 /* USER CODE BEGIN PFP */
-static void AccGyroCallback(LSM6DSL_AxesRaw_t * pRawData, uint16_t numItems);
+static void AccGyroCallback(GYRO_ACC_t * pRawData, uint16_t numItems);
 static void MagCallback(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems);
 
 /* USER CODE END PFP */
@@ -134,7 +134,8 @@ int main(void)
   MX_DMA_Init();
   /* USER CODE BEGIN 2 */
   SEGGER_SYSVIEW_Conf();
-  InitSensorBus1(AccGyroCallback, MagCallback);
+  InitSensorBus1(&AccGyroCallback, &MagCallback);
+
 
   /* USER CODE END 2 */
 
@@ -400,6 +401,12 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, LD1_Pin|LD3_Pin|LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(ExtAnalyzer3_GPIO_Port, ExtAnalyzer3_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOD, ExtAnalyzer1_Pin|ExtAnalyzer2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(USB_PowerSwitchOn_GPIO_Port, USB_PowerSwitchOn_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : MagDataRdy_Pin */
@@ -415,11 +422,25 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : ExtAnalyzer3_Pin */
+  GPIO_InitStruct.Pin = ExtAnalyzer3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(ExtAnalyzer3_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pin : Lms6dsl_Int1_Pin */
   GPIO_InitStruct.Pin = Lms6dsl_Int1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(Lms6dsl_Int1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : ExtAnalyzer1_Pin ExtAnalyzer2_Pin */
+  GPIO_InitStruct.Pin = ExtAnalyzer1_Pin|ExtAnalyzer2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pin : USB_PowerSwitchOn_Pin */
   GPIO_InitStruct.Pin = USB_PowerSwitchOn_Pin;
@@ -472,6 +493,59 @@ void HAL_I2C_MemRxCpltCallback(I2C_HandleTypeDef *hi2c) {
 	SensorBus1_DMA_CallBack();
 }
 
+
+void AccGyroCallback(GYRO_ACC_t * pRawData, uint16_t numItems) {
+
+	// First, average raw data
+	LSM6DSL_Axes_t gyroAvg = {0};
+	LSM6DSL_Axes_t accAvg = {0};
+
+	GYRO_ACC_t * pCruRawData = pRawData;
+	uint16_t itemCount = numItems;
+
+	// Now sum data sets
+	while(itemCount) {
+		gyroAvg.x += pCruRawData->gyro_data.x;
+		gyroAvg.y += pCruRawData->gyro_data.y;
+		gyroAvg.z += pCruRawData->gyro_data.z;
+
+		accAvg.x += pCruRawData->acc_data.x;
+		accAvg.y += pCruRawData->acc_data.y;
+		accAvg.z += pCruRawData->acc_data.z;
+
+		pCruRawData++;
+		itemCount--;
+	}
+
+	// Complete average
+	gyroAvg.x /= numItems;
+	gyroAvg.y /= numItems;
+	gyroAvg.z /= numItems;
+
+	accAvg.x /= numItems;
+	accAvg.y /= numItems;
+	accAvg.z /= numItems;
+
+
+	SEGGER_SYSVIEW_PrintfHost("Gyro Value: X = %d, Y = %d, Z = %d, ",
+			gyroAvg.x, gyroAvg.y, gyroAvg.z);
+
+	SEGGER_SYSVIEW_PrintfHost("Acc Value: X = %d, Y = %d, Z = %d, ",
+			accAvg.x, accAvg.y, accAvg.z);
+
+	if (accAvg.x > 1000) {
+		SEGGER_SYSVIEW_PrintfHost("!!!!ERROR !!!!!");
+	}
+}
+
+
+static void MagCallback(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems) {
+//	HAL_GetTick();
+
+	SEGGER_SYSVIEW_PrintfHost("Mag value: X = %d, Y = %d, Z = %d, ",
+				 pRawData->x, pRawData->y, pRawData->z);
+}
+
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -491,16 +565,6 @@ void StartDefaultTask(void *argument)
 		osDelay(1);
 	}
   /* USER CODE END 5 */
-}
-
-
-void AccGyroCallback(LSM6DSL_AxesRaw_t * pRawData, uint16_t numItems) {
-
-}
-
-
-static void MagCallback(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems) {
-
 }
 
 

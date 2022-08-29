@@ -1,5 +1,6 @@
 "./Core/Src/bsp_lsm303agr.o"
 "./Core/Src/bsp_lsm6dsl.o"
+"./Core/Src/debug_analyzer.o"
 "./Core/Src/freertos.o"
 "./Core/Src/main.o"
 "./Core/Src/non_block_queue_ndx.o"

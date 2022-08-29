@@ -25,15 +25,6 @@ int32_t bsp_lsm303agr_init() {
 		return LSM303AGR_ERROR;
 	}
 
-	// Vefify sensor ID (Just to verify that connection is make to chip)
-	if (LSM303AGR_MAG_ReadID(&bsp_mag_lsm303agr_Obj, &id) != LSM303AGR_OK) {
-		return LSM303AGR_ERROR;
-	}
-
-	if (id != LSM303AGR_ID_MG) {
-		return LSM303AGR_ERROR;
-	}
-
 	// Reset device and wait for powerup
 	if (lsm303agr_mag_boot_set(&bsp_mag_lsm303agr_Obj.Ctx, 1) != LSM303AGR_OK) {
 		return LSM303AGR_ERROR;

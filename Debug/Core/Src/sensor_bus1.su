@@ -1,5 +1,5 @@
-..\Core\Src\sensor_bus1.c:35:6:InitSensorBus1	16	static
-..\Core\Src\sensor_bus1.c:53:6:StartSensorBus1	8	static
-..\Core\Src\sensor_bus1.c:60:6:UpdateSensorBus1	8	static
-..\Core\Src\sensor_bus1.c:78:6:run_pending_dma	16	static
-..\Core\Src\sensor_bus1.c:119:6:SensorBus1_DMA_CallBack	8	static
+../Core/Src/sensor_bus1.c:35:6:InitSensorBus1	16	static
+../Core/Src/sensor_bus1.c:52:6:StartSensorBus1	8	static
+../Core/Src/sensor_bus1.c:58:6:UpdateSensorBus1	8	static
+../Core/Src/sensor_bus1.c:76:6:run_pending_dma	16	static
+../Core/Src/sensor_bus1.c:114:6:SensorBus1_DMA_CallBack	8	static

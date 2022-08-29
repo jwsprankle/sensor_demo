@@ -51,7 +51,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Core/Inc/acc_gyro_sensor.h \
  ../Drivers/BSP/Components/lsm6dsl/lsm6dsl.h \
  ../Drivers/BSP/Components/lsm6dsl/lsm6dsl_reg.h \
- ../Core/Inc/sensor_bus1.h \
+ ../Core/Inc/sensor_bus1.h ../Core/Inc/bsp_Lsm6dsl.h \
+ ../Core/Inc/bsp_lsm303agr.h \
  ../Drivers/BSP/Components/lsm303agr/lsm303agr.h \
  ../Drivers/BSP/Components/lsm303agr/lsm303agr_reg.h \
  ../Middlewares/Third_Party/SEGGER/SEGGER_SYSVIEW.h
@@ -109,6 +110,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/BSP/Components/lsm6dsl/lsm6dsl.h:
 ../Drivers/BSP/Components/lsm6dsl/lsm6dsl_reg.h:
 ../Core/Inc/sensor_bus1.h:
+../Core/Inc/bsp_Lsm6dsl.h:
+../Core/Inc/bsp_lsm303agr.h:
 ../Drivers/BSP/Components/lsm303agr/lsm303agr.h:
 ../Drivers/BSP/Components/lsm303agr/lsm303agr_reg.h:
 ../Middlewares/Third_Party/SEGGER/SEGGER_SYSVIEW.h:

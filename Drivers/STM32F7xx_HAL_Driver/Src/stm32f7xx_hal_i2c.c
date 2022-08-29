@@ -273,7 +273,7 @@
     [..]
      For specific callback AddrCallback use dedicated register callbacks : HAL_I2C_RegisterAddrCallback().
     [..]
-     Use function HAL_I2C_UnRegisterCallback to reset a callback to the
+     Use function HAL_I2C_UnRegisterCallback to reset a callback to the default
      weak function.
      HAL_I2C_UnRegisterCallback takes as parameters the HAL peripheral handle,
      and the Callback ID.

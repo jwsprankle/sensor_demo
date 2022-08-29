@@ -76,6 +76,8 @@ void Error_Handler(void);
 #define RMII_RXD1_GPIO_Port GPIOC
 #define LD1_Pin GPIO_PIN_0
 #define LD1_GPIO_Port GPIOB
+#define ExtAnalyzer3_Pin GPIO_PIN_12
+#define ExtAnalyzer3_GPIO_Port GPIOF
 #define Lms6dsl_Int1_Pin GPIO_PIN_14
 #define Lms6dsl_Int1_GPIO_Port GPIOF
 #define Lms6dsl_Int1_EXTI_IRQn EXTI15_10_IRQn
@@ -87,6 +89,10 @@ void Error_Handler(void);
 #define STLK_RX_GPIO_Port GPIOD
 #define STLK_TX_Pin GPIO_PIN_9
 #define STLK_TX_GPIO_Port GPIOD
+#define ExtAnalyzer1_Pin GPIO_PIN_14
+#define ExtAnalyzer1_GPIO_Port GPIOD
+#define ExtAnalyzer2_Pin GPIO_PIN_15
+#define ExtAnalyzer2_GPIO_Port GPIOD
 #define USB_PowerSwitchOn_Pin GPIO_PIN_6
 #define USB_PowerSwitchOn_GPIO_Port GPIOG
 #define USB_OverCurrent_Pin GPIO_PIN_7

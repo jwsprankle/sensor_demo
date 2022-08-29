@@ -46,29 +46,27 @@ void InitSensorBus1(AccGyroCallback_t pAccGyroCB, MagCallback_t pMagCB) {
 
 	bsp_lsm6dsl_init();
 	bsp_lsm303agr_init();
-	SEGGER_SYSVIEW_PrintfHost("InitSensorBus1");
 }
 
 
 void StartSensorBus1(void) {
 	bsp_lsm6dsl_enable();
 	bsp_lsm303agr_enable();
-	SEGGER_SYSVIEW_PrintfHost("StartSensorBus1");
 }
 
 
 void UpdateSensorBus1(void) {
+	SEGGER_SYSVIEW_PrintfHost("UpdateSensorBus1");
 
 	// Set based on pin state, using this method help with missed updates when stopped for debug
-	if (HAL_GPIO_ReadPin(MagDataRdy_GPIO_Port, MagDataRdy_Pin) == GPIO_PIN_SET) {
-		req_mag = GP_TRUE;
-		SEGGER_SYSVIEW_PrintfHost("req_mag requested");
-	}
-
-
 	if (HAL_GPIO_ReadPin(Lms6dsl_Int1_GPIO_Port, Lms6dsl_Int1_Pin) == GPIO_PIN_SET) {
 		req_gyro_acc = GP_TRUE;
-		SEGGER_SYSVIEW_PrintfHost("req_gyro_acc requested");
+		SEGGER_SYSVIEW_PrintfHost("req_gyro_acc");
+	}
+
+	if (HAL_GPIO_ReadPin(MagDataRdy_GPIO_Port, MagDataRdy_Pin) == GPIO_PIN_SET) {
+		req_mag = GP_TRUE;
+		SEGGER_SYSVIEW_PrintfHost("req_mag");
 	}
 
 	run_pending_dma();
@@ -76,14 +74,13 @@ void UpdateSensorBus1(void) {
 
 
 void run_pending_dma(void) {
-
+	SEGGER_SYSVIEW_PrintfHost("run_pending_dma");
 	// Must not be reentrant, this will catch that
 	// Must have SensorBus1_DMA_CallBack and UpdateSensorBus1 on same interrupt level
 	assert_param(lock_update == GP_FALSE);
 	lock_update = GP_TRUE;
 
 	if (in_process_dma != DMA_RDY) { // exit if previous still running
-		SEGGER_SYSVIEW_PrintfHost("run_pending_dma busy");
 		lock_update = GP_FALSE;
 		return;
 	}
@@ -95,21 +92,19 @@ void run_pending_dma(void) {
 				I2C_MEMADD_SIZE_8BIT, (uint8_t*) p_acc_gyro_raw_data,
 				acc_gyro_raw_data_size) == HAL_OK);
 
-		SEGGER_SYSVIEW_PrintfHost("req_gyro_acc HAL_I2C_Mem_Read_DMA scheduled");
-
 		in_process_dma = DMA_ACC_GYRO;
 		req_gyro_acc = GP_FALSE;
-
+		SEGGER_SYSVIEW_PrintfHost("req_gyro_acc DMA");
 	// Else check for mag request
 	} else if (req_mag) {
 		assert_param(HAL_I2C_Mem_Read_DMA(&hi2c1, LSM303AGR_I2C_ADD_MG,
 				LSM303AGR_OUTX_L_REG_M, I2C_MEMADD_SIZE_8BIT,
 				(uint8_t*) p_mag_raw_data, sizeof(LSM303AGR_AxesRaw_t)) == HAL_OK);
 
-		SEGGER_SYSVIEW_PrintfHost("req_mag HAL_I2C_Mem_Read_DMA scheduled");
 
 		in_process_dma = DMA_MAG;
 		req_mag = GP_FALSE;
+		SEGGER_SYSVIEW_PrintfHost("req_mag DMA");
 	}
 
 	lock_update = GP_FALSE;
@@ -123,7 +118,8 @@ void SensorBus1_DMA_CallBack(void) {
 	switch (in_process_dma) {
 
 	case DMA_ACC_GYRO:
-		// Acc Gyro call back with current raw data
+		SEGGER_SYSVIEW_PrintfHost("DMA_ACC_GYRO DMA CALLBACK");
+			// Acc Gyro call back with current raw data
 		pAccGyroCallback(p_acc_gyro_raw_data, GYRO_ACC_SAMPLES);
 
 		// Swap raw data storage
@@ -136,8 +132,7 @@ void SensorBus1_DMA_CallBack(void) {
 		break;
 
 	case DMA_MAG:
-
-		TODO: Look into how mag_raw_data is created in lsm303agr
+		SEGGER_SYSVIEW_PrintfHost("DMA_MAG DMA CALLBACK");
 		// Mag call back with current raw data
 		pMagCallback(p_mag_raw_data, 1);
 
@@ -151,7 +146,6 @@ void SensorBus1_DMA_CallBack(void) {
 		break;
 
 	default:
-		SEGGER_SYSVIEW_PrintfHost("in_process_dma Error");
 		assert_param(!HAL_OK);
 		break;
 	}

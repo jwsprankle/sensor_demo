@@ -1,10 +1,5 @@
-Core/Src/bsp_lsm6dsl.o: ../Core/Src/bsp_lsm6dsl.c \
- ../Core/Inc/sensor_bus1.h ../Core/Inc/bsp_Lsm6dsl.h \
- ../Drivers/BSP/Components/lsm6dsl/lsm6dsl.h \
- ../Drivers/BSP/Components/lsm6dsl/lsm6dsl_reg.h \
- ../Core/Inc/bsp_lsm303agr.h \
- ../Drivers/BSP/Components/lsm303agr/lsm303agr.h \
- ../Drivers/BSP/Components/lsm303agr/lsm303agr_reg.h ../Core/Inc/main.h \
+Core/Src/debug_analyzer.o: ../Core/Src/debug_analyzer.c \
+ ../Core/Inc/debug_analyzer.h ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
  ../Core/Inc/stm32f7xx_hal_conf.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_rcc.h \
@@ -38,18 +33,8 @@ Core/Src/bsp_lsm6dsl.o: ../Core/Src/bsp_lsm6dsl.c \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_uart_ex.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h \
- ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h \
- ../Core/Inc/bsp_Lsm6dsl.h ../Core/Inc/stm32f7xx_nucleo_bus.h \
- ../Core/Inc/stm32f7xx_nucleo_conf.h ../Core/Inc/stm32f7xx_nucleo_errno.h \
- ../Core/Inc/non_block_queue_ndx.h ../Core/Inc/general_purpose_defs.h \
- ../Drivers/BSP/Components/lsm6dsl/lsm6dsl_reg.h
-../Core/Inc/sensor_bus1.h:
-../Core/Inc/bsp_Lsm6dsl.h:
-../Drivers/BSP/Components/lsm6dsl/lsm6dsl.h:
-../Drivers/BSP/Components/lsm6dsl/lsm6dsl_reg.h:
-../Core/Inc/bsp_lsm303agr.h:
-../Drivers/BSP/Components/lsm303agr/lsm303agr.h:
-../Drivers/BSP/Components/lsm303agr/lsm303agr_reg.h:
+ ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h
+../Core/Inc/debug_analyzer.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h:
 ../Core/Inc/stm32f7xx_hal_conf.h:
@@ -85,10 +70,3 @@ Core/Src/bsp_lsm6dsl.o: ../Core/Src/bsp_lsm6dsl.c \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h:
-../Core/Inc/bsp_Lsm6dsl.h:
-../Core/Inc/stm32f7xx_nucleo_bus.h:
-../Core/Inc/stm32f7xx_nucleo_conf.h:
-../Core/Inc/stm32f7xx_nucleo_errno.h:
-../Core/Inc/non_block_queue_ndx.h:
-../Core/Inc/general_purpose_defs.h:
-../Drivers/BSP/Components/lsm6dsl/lsm6dsl_reg.h:

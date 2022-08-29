@@ -7,6 +7,7 @@
 C_SRCS += \
 ../Core/Src/bsp_lsm303agr.c \
 ../Core/Src/bsp_lsm6dsl.c \
+../Core/Src/debug_analyzer.c \
 ../Core/Src/freertos.c \
 ../Core/Src/main.c \
 ../Core/Src/non_block_queue_ndx.c \
@@ -22,6 +23,7 @@ C_SRCS += \
 OBJS += \
 ./Core/Src/bsp_lsm303agr.o \
 ./Core/Src/bsp_lsm6dsl.o \
+./Core/Src/debug_analyzer.o \
 ./Core/Src/freertos.o \
 ./Core/Src/main.o \
 ./Core/Src/non_block_queue_ndx.o \
@@ -37,6 +39,7 @@ OBJS += \
 C_DEPS += \
 ./Core/Src/bsp_lsm303agr.d \
 ./Core/Src/bsp_lsm6dsl.d \
+./Core/Src/debug_analyzer.d \
 ./Core/Src/freertos.d \
 ./Core/Src/main.d \
 ./Core/Src/non_block_queue_ndx.d \
@@ -57,7 +60,7 @@ Core/Src/%.o Core/Src/%.su: ../Core/Src/%.c Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/bsp_lsm303agr.d ./Core/Src/bsp_lsm303agr.o ./Core/Src/bsp_lsm303agr.su ./Core/Src/bsp_lsm6dsl.d ./Core/Src/bsp_lsm6dsl.o ./Core/Src/bsp_lsm6dsl.su ./Core/Src/freertos.d ./Core/Src/freertos.o ./Core/Src/freertos.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/non_block_queue_ndx.d ./Core/Src/non_block_queue_ndx.o ./Core/Src/non_block_queue_ndx.su ./Core/Src/sensor_bus1.d ./Core/Src/sensor_bus1.o ./Core/Src/sensor_bus1.su ./Core/Src/stm32f7xx_hal_msp.d ./Core/Src/stm32f7xx_hal_msp.o ./Core/Src/stm32f7xx_hal_msp.su ./Core/Src/stm32f7xx_hal_timebase_tim.d ./Core/Src/stm32f7xx_hal_timebase_tim.o ./Core/Src/stm32f7xx_hal_timebase_tim.su ./Core/Src/stm32f7xx_it.d ./Core/Src/stm32f7xx_it.o ./Core/Src/stm32f7xx_it.su ./Core/Src/stm32f7xx_nucleo_bus.d ./Core/Src/stm32f7xx_nucleo_bus.o ./Core/Src/stm32f7xx_nucleo_bus.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f7xx.d ./Core/Src/system_stm32f7xx.o ./Core/Src/system_stm32f7xx.su
+	-$(RM) ./Core/Src/bsp_lsm303agr.d ./Core/Src/bsp_lsm303agr.o ./Core/Src/bsp_lsm303agr.su ./Core/Src/bsp_lsm6dsl.d ./Core/Src/bsp_lsm6dsl.o ./Core/Src/bsp_lsm6dsl.su ./Core/Src/debug_analyzer.d ./Core/Src/debug_analyzer.o ./Core/Src/debug_analyzer.su ./Core/Src/freertos.d ./Core/Src/freertos.o ./Core/Src/freertos.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/non_block_queue_ndx.d ./Core/Src/non_block_queue_ndx.o ./Core/Src/non_block_queue_ndx.su ./Core/Src/sensor_bus1.d ./Core/Src/sensor_bus1.o ./Core/Src/sensor_bus1.su ./Core/Src/stm32f7xx_hal_msp.d ./Core/Src/stm32f7xx_hal_msp.o ./Core/Src/stm32f7xx_hal_msp.su ./Core/Src/stm32f7xx_hal_timebase_tim.d ./Core/Src/stm32f7xx_hal_timebase_tim.o ./Core/Src/stm32f7xx_hal_timebase_tim.su ./Core/Src/stm32f7xx_it.d ./Core/Src/stm32f7xx_it.o ./Core/Src/stm32f7xx_it.su ./Core/Src/stm32f7xx_nucleo_bus.d ./Core/Src/stm32f7xx_nucleo_bus.o ./Core/Src/stm32f7xx_nucleo_bus.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32f7xx.d ./Core/Src/system_stm32f7xx.o ./Core/Src/system_stm32f7xx.su
 
 .PHONY: clean-Core-2f-Src
 

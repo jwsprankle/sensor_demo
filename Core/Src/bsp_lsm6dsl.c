@@ -86,7 +86,7 @@ int32_t bsp_lsm6dsl_init() {
 	}
 
 	if (LSM6DSL_FIFO_Set_Watermark_Level(&bsp_lsm6dsl_Obj,
-			GYRO_ACC_TOTAL_SAMPLES * 3) != LSM6DSL_OK) {
+			GYRO_ACC_WATERMARK) != LSM6DSL_OK) {
 		return LSM6DSL_ERROR;
 	}
 

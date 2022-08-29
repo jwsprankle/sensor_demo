@@ -1,6 +1,8 @@
 Core/Src/sensor_bus1.o: ../Core/Src/sensor_bus1.c \
- ../Core/Inc/sensor_bus1.h ../Drivers/BSP/Components/lsm6dsl/lsm6dsl.h \
+ ../Core/Inc/sensor_bus1.h ../Core/Inc/bsp_Lsm6dsl.h \
+ ../Drivers/BSP/Components/lsm6dsl/lsm6dsl.h \
  ../Drivers/BSP/Components/lsm6dsl/lsm6dsl_reg.h \
+ ../Core/Inc/bsp_lsm303agr.h \
  ../Drivers/BSP/Components/lsm303agr/lsm303agr.h \
  ../Drivers/BSP/Components/lsm303agr/lsm303agr_reg.h ../Core/Inc/main.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal.h \
@@ -37,15 +39,16 @@ Core/Src/sensor_bus1.o: ../Core/Src/sensor_bus1.c \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h \
- ../Core/Inc/bsp_lsm6dsl.h ../Core/Inc/bsp_lsm303agr.h \
  ../Core/Inc/general_purpose_defs.h ../Core/Inc/stm32f7xx_nucleo_bus.h \
  ../Core/Inc/stm32f7xx_nucleo_conf.h ../Core/Inc/stm32f7xx_nucleo_errno.h \
  ../Middlewares/Third_Party/SEGGER/SEGGER_SYSVIEW.h \
  ../Middlewares/Third_Party/SEGGER/SEGGER.h \
  ../Middlewares/Third_Party/SEGGER/Global.h
 ../Core/Inc/sensor_bus1.h:
+../Core/Inc/bsp_Lsm6dsl.h:
 ../Drivers/BSP/Components/lsm6dsl/lsm6dsl.h:
 ../Drivers/BSP/Components/lsm6dsl/lsm6dsl_reg.h:
+../Core/Inc/bsp_lsm303agr.h:
 ../Drivers/BSP/Components/lsm303agr/lsm303agr.h:
 ../Drivers/BSP/Components/lsm303agr/lsm303agr_reg.h:
 ../Core/Inc/main.h:
@@ -83,8 +86,6 @@ Core/Src/sensor_bus1.o: ../Core/Src/sensor_bus1.c \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h:
-../Core/Inc/bsp_lsm6dsl.h:
-../Core/Inc/bsp_lsm303agr.h:
 ../Core/Inc/general_purpose_defs.h:
 ../Core/Inc/stm32f7xx_nucleo_bus.h:
 ../Core/Inc/stm32f7xx_nucleo_conf.h:
