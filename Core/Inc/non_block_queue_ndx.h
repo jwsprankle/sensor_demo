@@ -12,7 +12,7 @@ extern "C" {
 
 
 // Notes
-// Single Produce, Single Consumer queue that can be used between threads or interrupts.
+// Single Producer, Single Consumer queue that can be used between threads or interrupts.
 // This is a bare minimum implementation that works on any type of array of items without modifications.
 // Procedure to use this.
 // 

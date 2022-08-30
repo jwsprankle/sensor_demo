@@ -39,8 +39,9 @@ Core/Src/sensor_bus1.o: ../Core/Src/sensor_bus1.c \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h \
  ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h \
- ../Core/Inc/general_purpose_defs.h ../Core/Inc/stm32f7xx_nucleo_bus.h \
- ../Core/Inc/stm32f7xx_nucleo_conf.h ../Core/Inc/stm32f7xx_nucleo_errno.h \
+ ../Core/Inc/general_purpose_defs.h ../Core/Inc/debug_analyzer.h \
+ ../Core/Inc/stm32f7xx_nucleo_bus.h ../Core/Inc/stm32f7xx_nucleo_conf.h \
+ ../Core/Inc/stm32f7xx_nucleo_errno.h \
  ../Middlewares/Third_Party/SEGGER/SEGGER_SYSVIEW.h \
  ../Middlewares/Third_Party/SEGGER/SEGGER.h \
  ../Middlewares/Third_Party/SEGGER/Global.h
@@ -87,6 +88,7 @@ Core/Src/sensor_bus1.o: ../Core/Src/sensor_bus1.c \
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_ll_usb.h:
 ../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_pcd_ex.h:
 ../Core/Inc/general_purpose_defs.h:
+../Core/Inc/debug_analyzer.h:
 ../Core/Inc/stm32f7xx_nucleo_bus.h:
 ../Core/Inc/stm32f7xx_nucleo_conf.h:
 ../Core/Inc/stm32f7xx_nucleo_errno.h:

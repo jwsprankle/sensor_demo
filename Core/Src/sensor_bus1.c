@@ -2,6 +2,7 @@
 #include "main.h"
 #include "stm32f7xx_hal.h"
 #include "general_purpose_defs.h"
+#include "debug_analyzer.h"
 #include <stm32f7xx_nucleo_bus.h>
 #include <stm32f7xx_hal_i2c.h>
 #include <stdint.h>
@@ -55,20 +56,20 @@ void StartSensorBus1(void) {
 }
 
 
-void UpdateSensorBus1(void) {
+void UpdateSensorBus1(uint16_t GPIO_Pin) {
 	SEGGER_SYSVIEW_PrintfHost("UpdateSensorBus1");
 
-	// Set based on pin state, using this method help with missed updates when stopped for debug
-	if (HAL_GPIO_ReadPin(Lms6dsl_Int1_GPIO_Port, Lms6dsl_Int1_Pin) == GPIO_PIN_SET) {
+	// If acc/gyro
+	if (GPIO_Pin == Lms6dsl_Int1_Pin) {
 		req_gyro_acc = GP_TRUE;
 		SEGGER_SYSVIEW_PrintfHost("req_gyro_acc");
 	}
 
-	if (HAL_GPIO_ReadPin(MagDataRdy_GPIO_Port, MagDataRdy_Pin) == GPIO_PIN_SET) {
+	// if mag
+	if (GPIO_Pin == MagDataRdy_Pin) {
 		req_mag = GP_TRUE;
 		SEGGER_SYSVIEW_PrintfHost("req_mag");
 	}
-
 	run_pending_dma();
 }
 
@@ -84,7 +85,6 @@ void run_pending_dma(void) {
 		lock_update = GP_FALSE;
 		return;
 	}
-
 
 	// Else check for ryro/acc DMA read
 	if (req_gyro_acc) {
@@ -113,6 +113,7 @@ void run_pending_dma(void) {
 
 void SensorBus1_DMA_CallBack(void) {
 
+	DebugExtAnalyzerPulse1();
 
 	// Handle data ready from last dma request
 	switch (in_process_dma) {
@@ -129,6 +130,16 @@ void SensorBus1_DMA_CallBack(void) {
 			p_acc_gyro_raw_data = &acc_gyro_raw_data1[0];
 		}
 
+		// Check if we have back to back gyro/acc interrupts.
+		// This can happen if we halt for debug.
+		// In this case the interrupt line remains high between data sets and
+		// therefore does not generate second rising edge.
+		// We'll just check for interrupt still high and schedule DMA again
+		if (HAL_GPIO_ReadPin(Lms6dsl_Int1_GPIO_Port, Lms6dsl_Int1_Pin) == GPIO_PIN_SET) {
+			req_gyro_acc = GP_TRUE;
+			SEGGER_SYSVIEW_PrintfHost("Reschedule req_gyro_acc");
+		}
+
 		break;
 
 	case DMA_MAG:
@@ -141,6 +152,16 @@ void SensorBus1_DMA_CallBack(void) {
 			p_mag_raw_data = &mag_raw_data2;
 		} else {
 			p_mag_raw_data = &mag_raw_data1;
+		}
+
+		// Check if we have back to back gyro ready interrupts.
+		// This can happen if we halt for debug.
+		// In this case the interrupt line remains high between data sets and
+		// therefore does not generate second rising edge.
+		// We'll just check for interrupt still high and schedule DMA again
+		if (HAL_GPIO_ReadPin(MagDataRdy_GPIO_Port, MagDataRdy_Pin) == GPIO_PIN_SET) {
+			req_mag = GP_TRUE;
+			SEGGER_SYSVIEW_PrintfHost("Reschedule req_mag");
 		}
 
 		break;

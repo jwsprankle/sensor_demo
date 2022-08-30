@@ -470,22 +470,8 @@ static void MX_GPIO_Init(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 	if ( (GPIO_Pin == MagDataRdy_Pin) || (GPIO_Pin == Lms6dsl_Int1_Pin)) {
-		UpdateSensorBus1();
+		UpdateSensorBus1(GPIO_Pin);
 	}
-
-
-
-//	// if mag
-//	if (GPIO_Pin == MagDataRdy_Pin) {
-//		SensorBus1_DMA_Request(DMA_MAG);
-//		return;
-//	}
-//
-//	// If acc/gyro
-//	if (GPIO_Pin == Lms6dsl_Int1_Pin) {
-//		SensorBus1_DMA_Request(DMA_ACC_GYRO);
-//		return;
-//	}
 }
 
 // Here when DMA is complete and data is ready to use
@@ -532,10 +518,6 @@ void AccGyroCallback(GYRO_ACC_t * pRawData, uint16_t numItems) {
 
 	SEGGER_SYSVIEW_PrintfHost("Acc Value: X = %d, Y = %d, Z = %d, ",
 			accAvg.x, accAvg.y, accAvg.z);
-
-	if (accAvg.x > 1000) {
-		SEGGER_SYSVIEW_PrintfHost("!!!!ERROR !!!!!");
-	}
 }
 
 
