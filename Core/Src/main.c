@@ -134,7 +134,7 @@ int main(void)
   MX_DMA_Init();
   /* USER CODE BEGIN 2 */
   SEGGER_SYSVIEW_Conf();
-  InitSensorBus1(&AccGyroCallback, &MagCallback);
+  SensorBus1_Init(&AccGyroCallback, &MagCallback);
 
 
   /* USER CODE END 2 */
@@ -470,7 +470,7 @@ static void MX_GPIO_Init(void)
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 
 	if ( (GPIO_Pin == MagDataRdy_Pin) || (GPIO_Pin == Lms6dsl_Int1_Pin)) {
-		UpdateSensorBus1(GPIO_Pin);
+		SensorBus1_Intr(GPIO_Pin);
 	}
 }
 
@@ -540,7 +540,7 @@ static void MagCallback(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems) {
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
-	StartSensorBus1();
+	SensorBus1_Start();
 
 	/* Infinite loop */
 	for (;;) {

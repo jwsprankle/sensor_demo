@@ -33,7 +33,7 @@ static MagCallback_t pMagCallback = NULL;
 static void run_pending_dma(void);
 
 
-void InitSensorBus1(AccGyroCallback_t pAccGyroCB, MagCallback_t pMagCB) {
+void SensorBus1_Init(AccGyroCallback_t pAccGyroCB, MagCallback_t pMagCB) {
 
 	pAccGyroCallback = pAccGyroCB;
 	pMagCallback = pMagCB;
@@ -50,14 +50,14 @@ void InitSensorBus1(AccGyroCallback_t pAccGyroCB, MagCallback_t pMagCB) {
 }
 
 
-void StartSensorBus1(void) {
+void SensorBus1_Start(void) {
 	bsp_lsm6dsl_enable();
 	bsp_lsm303agr_enable();
 }
 
 
-void UpdateSensorBus1(uint16_t GPIO_Pin) {
-	SEGGER_SYSVIEW_PrintfHost("UpdateSensorBus1");
+void SensorBus1_Intr(uint16_t GPIO_Pin) {
+	SEGGER_SYSVIEW_PrintfHost("SensorBus1_Intr");
 
 	// If acc/gyro
 	if (GPIO_Pin == Lms6dsl_Int1_Pin) {
@@ -77,7 +77,7 @@ void UpdateSensorBus1(uint16_t GPIO_Pin) {
 void run_pending_dma(void) {
 	SEGGER_SYSVIEW_PrintfHost("run_pending_dma");
 	// Must not be reentrant, this will catch that
-	// Must have SensorBus1_DMA_CallBack and UpdateSensorBus1 on same interrupt level
+	// Must have SensorBus1_DMA_CallBack and SensorBus1_Intr on same interrupt level
 	assert_param(lock_update == GP_FALSE);
 	lock_update = GP_TRUE;
 

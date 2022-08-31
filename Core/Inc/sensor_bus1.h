@@ -15,9 +15,9 @@ typedef void (*AccGyroCallback_t)(GYRO_ACC_t * pRawData, uint16_t numItems);
 typedef void (*MagCallback_t)(LSM303AGR_AxesRaw_t * pRawData, uint16_t numItems);
 
 
-extern void InitSensorBus1(AccGyroCallback_t pAccGyroCB, MagCallback_t pMagCB);
-extern void StartSensorBus1(void);
-extern void UpdateSensorBus1(uint16_t GPIO_Pin);
+extern void SensorBus1_Init(AccGyroCallback_t pAccGyroCB, MagCallback_t pMagCB);
+extern void SensorBus1_Start(void);
+extern void SensorBus1_Intr(uint16_t GPIO_Pin);
 extern void SensorBus1_DMA_CallBack(void);
 
 
