@@ -1,3 +1,0 @@
-../Core/Src/bsp_lsm303agr.c:11:9:bsp_lsm303agr_init	40	static
-../Core/Src/bsp_lsm303agr.c:64:9:bsp_lsm303agr_enable	8	static
-../Core/Src/bsp_lsm303agr.c:73:9:bsp_lsm303agr_disable	8	static

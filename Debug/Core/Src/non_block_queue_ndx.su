@@ -1,8 +1,0 @@
-../Core/Src/non_block_queue_ndx.c:8:6:NBQ_Init	24	static
-../Core/Src/non_block_queue_ndx.c:30:13:NBQ_AcquireFront	16	static
-../Core/Src/non_block_queue_ndx.c:62:6:NBQ_ReleaseFront	16	static
-../Core/Src/non_block_queue_ndx.c:71:13:NBQ_AcquireBack	16	static
-../Core/Src/non_block_queue_ndx.c:101:6:NBQ_ReleaseBack	16	static
-../Core/Src/non_block_queue_ndx.c:109:6:NBQ_UnlockBack	16	static
-../Core/Src/non_block_queue_ndx.c:115:13:NBQ_Empty	16	static
-../Core/Src/non_block_queue_ndx.c:128:13:NBQ_QueueFull	24	static
