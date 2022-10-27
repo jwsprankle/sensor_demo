@@ -47,7 +47,7 @@ void DebugExtAnalyzerReset2(void)
 }
 
 
-void DebugExtAnalyzerPulse3(void)
+void DebugExtAnalyzerPulse4(void)
 {
 		HAL_GPIO_WritePin(ExtAnalyzer3_GPIO_Port, ExtAnalyzer3_Pin, GPIO_PIN_SET);
 		HAL_GPIO_WritePin(ExtAnalyzer3_GPIO_Port, ExtAnalyzer3_Pin, GPIO_PIN_RESET);

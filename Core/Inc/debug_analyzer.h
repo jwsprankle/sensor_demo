@@ -14,7 +14,7 @@ void DebugExtAnalyzerReset1(void);
 void DebugExtAnalyzerPulse2(void);
 void DebugExtAnalyzerSet2(void);
 void DebugExtAnalyzerReset2(void);
-void DebugExtAnalyzerPulse3(void);
+void DebugExtAnalyzerPulse4(void);
 void DebugExtAnalyzerSet3(void);
 void DebugExtAnalyzerReset3(void);
 

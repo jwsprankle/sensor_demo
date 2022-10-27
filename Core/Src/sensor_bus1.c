@@ -119,7 +119,7 @@ void SensorBus1_DMA_CallBack(void) {
 	switch (in_process_dma) {
 
 	case DMA_ACC_GYRO:
-		SEGGER_SYSVIEW_PrintfHost("DMA_ACC_GYRO DMA CALLBACK");
+		SEGGER_SYSVIEW_PrintfHost("DMA_ACC_GYRO CALLBACK");
 			// Acc Gyro call back with current raw data
 		pAccGyroCallback(p_acc_gyro_raw_data, GYRO_ACC_SAMPLES);
 
@@ -143,7 +143,7 @@ void SensorBus1_DMA_CallBack(void) {
 		break;
 
 	case DMA_MAG:
-		SEGGER_SYSVIEW_PrintfHost("DMA_MAG DMA CALLBACK");
+		SEGGER_SYSVIEW_PrintfHost("DMA_MAG CALLBACK");
 		// Mag call back with current raw data
 		pMagCallback(p_mag_raw_data, 1);
 

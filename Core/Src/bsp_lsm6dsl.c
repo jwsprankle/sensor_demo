@@ -98,8 +98,8 @@ int32_t bsp_lsm6dsl_init() {
 	bsp_lsm6dsl_Obj.is_initialized = 1;
 
 	// Enable interrupt
-	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
-	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
+//	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+//	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
 	return LSM6DSL_OK;
 }

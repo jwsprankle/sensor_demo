@@ -19,13 +19,13 @@ void NBQ_Init(volatile NBQ_QueueHdr_t * pQueueHdr, void * pQueueBuffer, uint32_t
 
 
 // This grabs the next Front ptr without actually advancing the front
-// This all the content of the front to be modified with actually siginalling new data ready.
+// This allows the content of the front to be modified with actually signaling new data ready.
 // To complete process call NBQ_IncFront to signal new data.
-// Rerurns NBQ_FAIL if queue is full
+// Returns NBQ_FAIL if queue is full
 //
 // This should only be called in producer thread.
 // Producer thread only reference pQueueHdr->pBack, so we'll insure we use atomic to read this variable
-// Comsumer thread only references pQueueHdr->pFront, thus atomic writes are require to write this variable.
+// Consumer thread only references pQueueHdr->pFront, thus atomic writes are require to write this variable.
 // 
 GP_Status_t NBQ_AcquireFront(volatile NBQ_QueueHdr_t * pQueueHdr, volatile void ** ppNextFront) 
 {
@@ -108,7 +108,7 @@ void NBQ_ReleaseBack(volatile NBQ_QueueHdr_t * pQueueHdr)
 // Unlock back without pop
 void NBQ_UnlockBack(volatile NBQ_QueueHdr_t * pQueueHdr)
 {
-	pQueueHdr->pNextBack = NULL; 							// Release witout poping it off the queue, this allow you to review it an leave it
+	pQueueHdr->pNextBack = NULL; 							// Release without popping it off the queue, this allow you to review it an leave it
 }
 
 

@@ -21,14 +21,6 @@ int32_t bsp_lsm303agr_enable(void);
 int32_t bsp_lsm303agr_disable(void);
 
 
-
-typedef struct {
-	lsm303agr_axis3bit32_t mag_data;
-	lsm303agr_axis3bit32_t acc_data;
-	uint32_t timeStamp;
-} mag_acc_rec_t;
-
-
 #ifdef __cplusplus
 }
 #endif

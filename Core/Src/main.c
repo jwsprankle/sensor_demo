@@ -27,6 +27,7 @@
 #include "lsm6dsl.h"
 #include "sensor_bus1.h"
 #include <SEGGER_SYSVIEW.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -456,10 +457,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(USB_OverCurrent_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI3_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(EXTI3_IRQn, 5, 0); //MagDataRdy _EXIT3
   HAL_NVIC_EnableIRQ(EXTI3_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0); // Lms6dsl_Int1 _EXI14
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }
@@ -548,8 +549,6 @@ void StartDefaultTask(void *argument)
 	}
   /* USER CODE END 5 */
 }
-
-
 
 /**
   * @brief  Period elapsed callback in non blocking mode
