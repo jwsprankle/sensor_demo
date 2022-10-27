@@ -97,40 +97,9 @@ int32_t bsp_lsm6dsl_init() {
 
 	bsp_lsm6dsl_Obj.is_initialized = 1;
 
-	// Enable interrupt
-//	HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
-//	HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-
 	return LSM6DSL_OK;
 }
 
-//void bsp_lsm6dsl_request_acc_gyro(void)
-//{
-
-//	DebugExtAnalyzerSet1();
-//	
-
-//	// Read INT_1 pin state to determine if data is ready, this is faster than LSM6DSL_FIFO_Get_Full_Status which calls readi2c
-//	// For now we assume only watermark interrupt is connected to int_1
-//	
-////	FIX ME, always SET!!!!! WHY!!!!!
-////	
-//////	if (HAL_GPIO_ReadPin(Lms6dsl_Int1_GPIO_Port, Lms6dsl_Int1_Pin) == GPIO_PIN_SET)
-////	{
-////		if (HAL_I2C_Mem_Read_DMA(&hi2c1, LSM6DSL_I2C_ADD_H, LSM6DSL_FIFO_DATA_OUT_L, I2C_MEMADD_SIZE_8BIT, (uint8_t *)&rawDataSample, data_raw_size) != HAL_ERROR) 		
-////		{   
-////			// Signal that this is a acc_gyro_dma
-////			request_read_acc_gyro_dma();
-////		}
-////		else
-////		{
-////			__NOP;
-////		}
-////	}
-//	
-
-//	DebugExtAnalyzerReset1();
-//}
 
 void bsp_lsm6dsl_enable(void) {
 	LSM6DSL_ACC_Enable(&bsp_lsm6dsl_Obj);

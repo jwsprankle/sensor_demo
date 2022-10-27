@@ -88,18 +88,20 @@ void run_pending_dma(void) {
 
 	// Else check for ryro/acc DMA read
 	if (req_gyro_acc) {
-		assert_param(HAL_I2C_Mem_Read_DMA(&hi2c1, LSM6DSL_I2C_ADD_H, LSM6DSL_FIFO_DATA_OUT_L,
+		// TODO: Handle error
+		HAL_I2C_Mem_Read_DMA(&hi2c1, LSM6DSL_I2C_ADD_H, LSM6DSL_FIFO_DATA_OUT_L,
 				I2C_MEMADD_SIZE_8BIT, (uint8_t*) p_acc_gyro_raw_data,
-				acc_gyro_raw_data_size) == HAL_OK);
+				acc_gyro_raw_data_size);
 
 		in_process_dma = DMA_ACC_GYRO;
 		req_gyro_acc = GP_FALSE;
 		SEGGER_SYSVIEW_PrintfHost("req_gyro_acc DMA");
 	// Else check for mag request
 	} else if (req_mag) {
-		assert_param(HAL_I2C_Mem_Read_DMA(&hi2c1, LSM303AGR_I2C_ADD_MG,
+		// TODO: Handle error
+		HAL_I2C_Mem_Read_DMA(&hi2c1, LSM303AGR_I2C_ADD_MG,
 				LSM303AGR_OUTX_L_REG_M, I2C_MEMADD_SIZE_8BIT,
-				(uint8_t*) p_mag_raw_data, sizeof(LSM303AGR_AxesRaw_t)) == HAL_OK);
+				(uint8_t*) p_mag_raw_data, sizeof(LSM303AGR_AxesRaw_t));
 
 
 		in_process_dma = DMA_MAG;
